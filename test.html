@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .product {
+            width: 23%;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Page</h1>
+    <div class="product-container">
+        <div class="product">
+            <h2>Product Name: Product 1</h2>
+            <p>Price: 10</p>
+            <img src="product_image_1.jpg" alt="Product Image 1">
+            <button class="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Product Name: Product 2</h2>
+            <p>Price: 15</p>
+            <img src="product_image_2.jpg" alt="Product Image 2">
+            <button class="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Product Name: Product 3</h2>
+            <p>Price: 20</p>
+            <img src="product_image_3.jpg" alt="Product Image 3">
+            <button class="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Product Name: Product 4</h2>
+            <p>Price: 25</p>
+            <img src="product_image_4.jpg" alt="Product Image 4">
+            <button class="addToCartBtn">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        var addToCartButtons = document.querySelectorAll(".addToCartBtn");
+
+        addToCartButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                var productContainer = button.parentNode;
+                var productName = productContainer.querySelector("h2").textContent;
+                var price = productContainer.querySelector("p").textContent;
+                var imageUrl = productContainer.querySelector("img").src;
+
+                var cartItem = {
+                    name: productName,
+                    price: price,
+                    image: imageUrl
+                };
+
+                var cart = JSON.parse(localStorage.getItem("cart")) || [];
+                cart.push(cartItem);
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+                alert("Product added to cart!");
+            });
+        });
+    </script>
+</body>
+</html>

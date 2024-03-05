@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .cart-item img {
+            width: 100px; /* Set the width of the image */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 20px;
+        }
+        .cart-item p {
+            margin: 0;
+        }
+        .remove-btn {
+            background-color: #ff5555;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .remove-btn:hover {
+            background-color: #ff3333;
+        }
+        .total-price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #buyNowBtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #buyNowBtn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cart</h1>
+    <div id="cartItems"></div>
+    <p class="total-price" id="totalPrice">Total Price: ₹0</p>
+    <button id="clearCartBtn">Clear Cart</button>
+    <button id="buyNowBtn">Buy Now</button>
+
+    <script>
+        var cartItemsDiv = document.getElementById("cartItems");
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
+        var totalPrice = 0;
+
+        cart.forEach(function(item, index) {
+            var cartItemDiv = document.createElement("div");
+            cartItemDiv.classList.add("cart-item");
+            cartItemDiv.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <p>${item.name} - ₹${item.price}</p>
+                <button class="remove-btn" data-index="${index}">Remove</button>
+            `;
+            cartItemsDiv.appendChild(cartItemDiv);
+            var itemPrice = parseFloat(item.price.replace(/[^\d.-]/g, ""));
+            if (!isNaN(itemPrice)) {
+                totalPrice += itemPrice;
+            }
+        });
+
+        var totalElement = document.getElementById("totalPrice");
+        totalElement.textContent = "Total Price: ₹" + totalPrice.toFixed(2);
+
+        var removeButtons = document.querySelectorAll(".remove-btn");
+        removeButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                var index = parseInt(button.getAttribute("data-index"));
+                var itemPrice = parseFloat(cart[index].price.replace(/[^\d.-]/g, ""));
+                if (!isNaN(itemPrice)) {
+                    totalPrice -= itemPrice;
+                }
+                cart.splice(index, 1);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                location.reload();
+            });
+        });
+
+        var clearCartBtn = document.getElementById("clearCartBtn");
+        clearCartBtn.addEventListener("click", function() {
+            localStorage.removeItem("cart");
+            location.reload();
+        });
+
+        var buyNowBtn = document.getElementById("buyNowBtn");
+        buyNowBtn.addEventListener("click", function() {
+            // You can add your buy now logic here
+            alert("Implement your Buy Now functionality here.");
+        });
+    </script>
+</body>
+</html>

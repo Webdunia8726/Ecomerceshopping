@@ -1,0 +1,40 @@
+.btncard{
+    background-color: #FF004D;
+    color: white;
+
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+    width: 120px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+}
+
+.btncard:hover{
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    background-color: red;
+}
+.imgproductset{
+    width: 150px;
+    height: 150px;
+}
+.product{
+
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #6420AA;
+    color:white;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    border-radius: 10px;
+}
+.product:hover{
+    box-shadow: rgba(241, 2, 2, 0.56) 0px 22px 70px 4px;
+    background-color: white;
+    color: black;
+}
+.underline{
+    text-decoration: underline;
+}
+.product h5{
+    margin-top: 5px;
+}
